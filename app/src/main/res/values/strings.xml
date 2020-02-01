@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Créateur de listes</string>
+    <string name="ajouter_membres">Ajouter membres</string>
+    <string name="enregistrer">Enregistrer</string>
+    <string name="lister">Lister</string>
+    <string name="rechercher">Rechercher</string>
+    <string name="liste_par_sexe">Liste par sexe</string>
+    <string name="liste_par_sexe_f_minin_et_leur_fonction">Liste par sexe féminin et leur fonction</string>
+    <string name="liste_par_sexe_f_minin_et">Liste par sexe féminin et...</string>
+
+    <string name="ouvertureNav">Ouverture du menu</string>
+    <string name="fermetureNav">Fermeture du menu</string>
+    <string name="prenom">Prénom</string>
+    <string name="nom">Nom</string>
+    <string name="homme">Homme</string>
+    <string name="femme">Femme</string>
+    <string name="fonction">Fonction</string>
+    <string name="commentaires">Commentaires</string>
+    <string name="envoyer">Envoyer</string>
+
+</resources>
