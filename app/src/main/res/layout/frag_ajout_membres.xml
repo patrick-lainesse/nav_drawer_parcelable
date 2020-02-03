@@ -4,7 +4,6 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/fragA_nom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
@@ -13,13 +12,13 @@
         android:hint="@string/nom">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragA_nom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/fragA_prenom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -27,22 +26,26 @@
         android:hint="@string/prenom">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragA_prenom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
 
     <RadioGroup
+        android:id="@+id/fragA_radioSexe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <RadioButton
+            android:id="@+id/fragA_radioHomme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:text="@string/homme"/>
         <RadioButton
+            android:id="@+id/fragA_radioFemme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -59,13 +62,12 @@
         android:hint="@string/fonction">
 
         <AutoCompleteTextView
-            android:id="@+id/menu_fonction"
+            android:id="@+id/fragA_menuFonction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/fragA_commentaires"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -74,6 +76,7 @@
         android:hint="@string/commentaires">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragA_commentaires"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
@@ -83,7 +86,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/bouton_envoyer"
+        android:id="@+id/fragA_bouton_envoyer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"

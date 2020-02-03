@@ -7,12 +7,12 @@ public class Membre implements Parcelable {
 
     private String nom;
     private String prenom;
-    private int sexe;       // 1 = homme; 2 = femme
-    private int fonction;   // 0: enseignant; 1: étudiant; 2: ingénieur; 3: retraité; 4: autre
+    private String sexe;
+    private String fonction;
     private String commentaires;
 
     // constructeur
-    public Membre(String nom, String prenom, int sexe, int fonction, String commentaires) {
+    public Membre(String nom, String prenom, String sexe, String fonction, String commentaires) {
         this.nom = nom;
         this.prenom = prenom;
         this.sexe = sexe;
@@ -24,8 +24,8 @@ public class Membre implements Parcelable {
     protected Membre(Parcel in) {
         nom = in.readString();
         prenom = in.readString();
-        sexe = in.readInt();
-        fonction = in.readInt();
+        sexe = in.readString();
+        fonction = in.readString();
         commentaires = in.readString();
     }
 
@@ -33,8 +33,8 @@ public class Membre implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(nom);
         dest.writeString(prenom);
-        dest.writeInt(sexe);
-        dest.writeInt(fonction);
+        dest.writeString(sexe);
+        dest.writeString(fonction);
         dest.writeString(commentaires);
     }
 
