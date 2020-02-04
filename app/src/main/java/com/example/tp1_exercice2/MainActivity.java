@@ -21,8 +21,10 @@ package com.example.tp1_exercice2;
         - utiliser l'outil palette bitmap
         */
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -43,10 +45,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
+    //private Bundle fragBundle;      // à nettoyer probablement
+    private String fragString = "bye-bye";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // on récupère le intent contenant l'ArrayList de membres ajoutés qui ne sont pas encore enregistrés en .txt
+        Intent intent = getIntent();
+        fragString = intent.getStringExtra("testString");       // à transformer en arraylist
+
+        // à nettoyer
+        Toast.makeText(this, fragString, Toast.LENGTH_LONG).show();
 
         // appel de la méthode pour remplir le drawer
         setDrawerLayout();
@@ -85,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Bundle bundle = new Bundle();
 
         // test de bundle
-        bundle.putString("testMain", "ALLO");
+        bundle.putString("testMain", fragString);
         Fragment monFragment = null;
 
         // on vérifie l'option sélectionnée sur le drawer
@@ -103,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 default:
                     monFragment = null;
                     // si le temps: rajouter un fragment "accueuil" qui imprime un message et/ou le nombre de membres non enregistrés au fichier encore
+                    // ça pourrait être le fragmentB pour montrer les membres en "cards" qui ne sont pas encore ajoutés à la liste
         }
 
         // suite test

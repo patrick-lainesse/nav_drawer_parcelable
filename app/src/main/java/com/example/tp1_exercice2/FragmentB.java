@@ -25,10 +25,11 @@ public class FragmentB extends Fragment {
     private void setMessage(View v) {
 
         TextView textView = v.findViewById(R.id.fragB_message);
-        textView.setText("Allô");
-
         TextView textView2 = v.findViewById(R.id.fragB_message2);
-        textView2.setText("Deuxième ligne de texte");
+        String test = this.getArguments().getString("testMain");
+
+        textView.setText("Voici la liste des membres à ajouter");
+        textView2.setText(test);
 
 
     }

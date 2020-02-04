@@ -1,6 +1,7 @@
 package com.example.tp1_exercice2;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -41,9 +42,18 @@ public class FragmentA extends Fragment {
         String test = this.getArguments().getString("testMain");
         Toast.makeText(getActivity(), test, Toast.LENGTH_LONG).show();
 
+
+
         setBouton(view);        // bundle???
 
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString("stringA", "Youppi");
     }
 
     // fonction qui remplit le spinner
@@ -85,9 +95,6 @@ public class FragmentA extends Fragment {
 
                 // vérification de la sélection du bouton radio ??? problème de pas capable de getText()???
                 int choixSexe = radioSexe.getCheckedRadioButtonId();
-                //RadioButton boutonSexe = v.findViewById(choixSexe);
-                // if (selectedRadioButtonID != -1)
-                //testc = boutonSexe.getText().toString();
 
                 if (choixSexe == R.id.fragA_radioFemme) {
                     formSexe = "Femme";
@@ -111,17 +118,13 @@ public class FragmentA extends Fragment {
                     formComment = commentairesET.getText().toString();
                 }
 
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                intent.putExtra("testString", formNom);
+                startActivity(intent);
+
                 // bon code ici???
                 //Toast.makeText(getActivity(), formNom + " " + formPrenom + " " + formSexe + " " + formComment, Toast.LENGTH_SHORT).show();
 
-                // TEST BUNDLE ???
-          /*      Bundle extras = activiteB.getIntent().getExtras();
-                String testBundle = extras.getString("testMain");*/
-
-                //Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
-
-
-                // ?????? manque le listener sur le selected autocomplete etc...???
 
     /*            listeTemp.add(new Membre(nomET.getText().toString(),
                                     prenomET.getText().toString(),
