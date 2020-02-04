@@ -11,11 +11,16 @@ package com.example.tp1_exercice2;
         Icônes: https://material.io/resources/icons/?style=baseline
         TVAC, tutoriel material design: https://www.youtube.com/watch?v=VD3YItr9nMg
 
+        Application testée sur un appareil Nexus 7, API 28 AVD
+
 
         À faire:
         - penser à un active text overlay (pour l'activité courante highlightée)
         - utiliser l'outil palette bitmap
         */
+
+import android.os.Bundle;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -23,16 +28,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
-
-
-import android.app.FragmentManager;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -89,8 +85,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 monFragment = new FragmentA();
                 break;
 
+            case R.id.menu_enregistrer:
+                monFragment = new FragmentB();
+                break;
+
                 default:
                     monFragment = null;
+                    // si le temps: rajouter un fragment "accueuil" qui imprime un message et/ou le nombre de membres non enregistrés au fichier encore
         }
 
         // placer le layout correspondant à la sélection dans le fragment

@@ -17,6 +17,8 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class FragmentA extends Fragment {
@@ -41,10 +43,11 @@ public class FragmentA extends Fragment {
     private void setAdapter(View v, Activity activity) {
 
         final String[] postes = new String[]{"Enseignant", "Étudiant", "Ingénieur", "Retraité", "Autre"};
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.item_menu_fonction, postes);
-
         AutoCompleteTextView menuFonctions = v.findViewById(R.id.fragA_menuFonction);
+
+        // conversion de postes en list pour utiliser la fonction contains
+        //final List<String> tabPostes = Arrays.asList(postes);
         menuFonctions.setAdapter(adapter);
     }
 
@@ -102,6 +105,10 @@ public class FragmentA extends Fragment {
 
                 formFonction = spinnerFonctions.getText().toString();
 
+
+                // vérification si le poste entré fait partie de la liste
+                //    if(tabPostes.contains(formFonction)                                         ????? à ajouter, sinon peut entrer nquel poste
+
                 if(commentairesET != null && !TextUtils.isEmpty(commentairesET.getText())) {
                     formComment = commentairesET.getText().toString();
                 }
@@ -114,6 +121,9 @@ public class FragmentA extends Fragment {
 
                 else{
                     listeTemp.add(new Membre(formNom, formPrenom, formSexe, formFonction, formComment));
+                    Toast.makeText(getActivity(), "Le membre " + formPrenom + " " + formNom + " été correctement ajouté à la liste. "
+                            + "Veuillez ne pas l'oublier de l'enregistrer dans le fichier .txt." + formFonction, Toast.LENGTH_LONG).show();
+// enlever le formFonction à la fin du toast ???????
                 }
 
                 // on met l'arraylist dans un intent pour envoyer aux autres fragments???

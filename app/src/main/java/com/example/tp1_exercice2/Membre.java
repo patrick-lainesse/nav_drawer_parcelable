@@ -29,6 +29,26 @@ public class Membre implements Parcelable {
         commentaires = in.readString();
     }
 
+    public String getNom() {
+        return nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public String getSexe() {
+        return sexe;
+    }
+
+    public String getFonction() {
+        return fonction;
+    }
+
+    public String getCommentaires() {
+        return commentaires;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(nom);
