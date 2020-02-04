@@ -32,6 +32,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
@@ -75,6 +77,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // https://abhiandroid.com/materialdesign/navigation-drawer#Drawer_Layout_In_Android
 
+        // bundle et fragments array list
+        // https://stackoverflow.com/questions/39867847/android-passing-arraylistmodel-to-fragment-from-activity
+        final ArrayList<Membre> membresTemp = new ArrayList<Membre>();
+        Bundle bundle = new Bundle();
+
+        // test de bundle
+        bundle.putString("testMain", "ALLO");
         Fragment monFragment = null;
 
         // on vérifie l'option sélectionnée sur le drawer
@@ -93,6 +102,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     monFragment = null;
                     // si le temps: rajouter un fragment "accueuil" qui imprime un message et/ou le nombre de membres non enregistrés au fichier encore
         }
+
+        // suite test
+        monFragment.setArguments(bundle);
 
         // placer le layout correspondant à la sélection dans le fragment
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

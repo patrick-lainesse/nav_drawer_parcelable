@@ -1,6 +1,7 @@
 package com.example.tp1_exercice2;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -72,6 +73,10 @@ public class FragmentA extends Fragment {
             @Override
             public void onClick(View v) {
 
+                // test bundle ?????
+                Bundle extras = getActivity().getIntent().getExtras();
+                String testBundle = extras.getString("testMain");
+
                 // déclaration des variables String pour recevoir chaque élément d'un objet membre
                 String formNom = null;
                 String formPrenom = null;
@@ -122,9 +127,15 @@ public class FragmentA extends Fragment {
                 else{
                     listeTemp.add(new Membre(formNom, formPrenom, formSexe, formFonction, formComment));
                     Toast.makeText(getActivity(), "Le membre " + formPrenom + " " + formNom + " été correctement ajouté à la liste. "
-                            + "Veuillez ne pas l'oublier de l'enregistrer dans le fichier .txt." + formFonction, Toast.LENGTH_LONG).show();
+                            + "Veuillez ne pas l'oublier de l'enregistrer dans le fichier .txt." + formFonction + testBundle, Toast.LENGTH_LONG).show();
 // enlever le formFonction à la fin du toast ???????
                 }
+
+                // test d'ajout de bundle?????
+                //Intent retour = new Intent();
+                //retour.putExtra("testA", formNom);
+
+
 
                 // on met l'arraylist dans un intent pour envoyer aux autres fragments???
                 // on vérifie si un doublon ???
