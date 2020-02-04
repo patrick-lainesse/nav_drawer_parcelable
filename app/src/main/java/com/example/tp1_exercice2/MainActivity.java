@@ -11,6 +11,8 @@ package com.example.tp1_exercice2;
         Icônes: https://material.io/resources/icons/?style=baseline
         TVAC, tutoriel material design: https://www.youtube.com/watch?v=VD3YItr9nMg
 
+        Ajouter les fragments au manifest????
+
         Application testée sur un appareil Nexus 7, API 28 AVD
 
 

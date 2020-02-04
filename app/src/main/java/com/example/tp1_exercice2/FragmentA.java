@@ -1,33 +1,34 @@
 package com.example.tp1_exercice2;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 
 public class FragmentA extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        // on crée un ArrayList pour stocker les membres créés mais non encore enregistrés au fichier ???? éliminer si je décide simplement de renvoyer les membres à l'autre activité
-        //ArrayList<Membre> listeTemp = new ArrayList<Membre>();
+        // on crée un ArrayList pour stocker les membres créés mais non encore enregistrés au fichier
+        ArrayList<Membre> listeTemp = new ArrayList<Membre>();
 
         // on inflate le layout de l'activité ajouter membres dans le fragment
         View view = inflater.inflate(R.layout.frag_ajout_membres, container, false);
@@ -35,7 +36,12 @@ public class FragmentA extends Fragment {
 
         // pour remplir la liste du spinner
         setAdapter(view, activity);
-        setBouton(view);
+
+
+        String test = this.getArguments().getString("testMain");
+        Toast.makeText(getActivity(), test, Toast.LENGTH_LONG).show();
+
+        setBouton(view);        // bundle???
 
         return view;
     }
@@ -44,11 +50,11 @@ public class FragmentA extends Fragment {
     private void setAdapter(View v, Activity activity) {
 
         final String[] postes = new String[]{"Enseignant", "Étudiant", "Ingénieur", "Retraité", "Autre"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.item_menu_fonction, postes);
-        AutoCompleteTextView menuFonctions = v.findViewById(R.id.fragA_menuFonction);
 
-        // conversion de postes en list pour utiliser la fonction contains
-        //final List<String> tabPostes = Arrays.asList(postes);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.item_menu_fonction, postes);
+
+        //AutoCompleteTextView menuFonctions = v.findViewById(R.id.fragA_menuFonction);  ???? problème ici quand saisit texte dans la boîte
+        AutoCompleteTextView menuFonctions = v.findViewById(R.id.fragA_menuFonction);
         menuFonctions.setAdapter(adapter);
     }
 
@@ -63,8 +69,6 @@ public class FragmentA extends Fragment {
         final TextInputEditText commentairesET = v.findViewById(R.id.fragA_commentaires);
         Button button = v.findViewById(R.id.fragA_bouton_envoyer);
 
-        final ArrayList<Membre> listeTemp = new ArrayList<Membre>();
-
         // ajout d'un écouteur sur le spinner ?????
 
 
@@ -73,15 +77,10 @@ public class FragmentA extends Fragment {
             @Override
             public void onClick(View v) {
 
-                // test bundle ?????
-                Bundle extras = getActivity().getIntent().getExtras();
-                String testBundle = extras.getString("testMain");
-
                 // déclaration des variables String pour recevoir chaque élément d'un objet membre
                 String formNom = null;
                 String formPrenom = null;
                 String formSexe = null;
-                String formFonction = null;
                 String formComment = null;
 
                 // vérification de la sélection du bouton radio ??? problème de pas capable de getText()???
@@ -108,37 +107,39 @@ public class FragmentA extends Fragment {
                     formPrenom = prenomET.getText().toString();
                 }
 
-                formFonction = spinnerFonctions.getText().toString();
-
-
-                // vérification si le poste entré fait partie de la liste
-                //    if(tabPostes.contains(formFonction)                                         ????? à ajouter, sinon peut entrer nquel poste
-
                 if(commentairesET != null && !TextUtils.isEmpty(commentairesET.getText())) {
                     formComment = commentairesET.getText().toString();
                 }
 
-                //Toast.makeText(getActivity(), formNom + " " + formPrenom + " " + formSexe + " " + formFonction + " " + formComment, Toast.LENGTH_SHORT).show();
+                // bon code ici???
+                //Toast.makeText(getActivity(), formNom + " " + formPrenom + " " + formSexe + " " + formComment, Toast.LENGTH_SHORT).show();
 
-                if(formNom == null || formPrenom == null || formSexe == null || formFonction == null ||formComment == null) {
-                    Toast.makeText(getActivity(), "Veuillez entrer toutes les cases correctement pour créer un nouveau membre.", Toast.LENGTH_LONG).show();
-                }
+                // TEST BUNDLE ???
+          /*      Bundle extras = activiteB.getIntent().getExtras();
+                String testBundle = extras.getString("testMain");*/
 
-                else{
-                    listeTemp.add(new Membre(formNom, formPrenom, formSexe, formFonction, formComment));
-                    Toast.makeText(getActivity(), "Le membre " + formPrenom + " " + formNom + " été correctement ajouté à la liste. "
-                            + "Veuillez ne pas l'oublier de l'enregistrer dans le fichier .txt." + formFonction + testBundle, Toast.LENGTH_LONG).show();
-// enlever le formFonction à la fin du toast ???????
-                }
-
-                // test d'ajout de bundle?????
-                //Intent retour = new Intent();
-                //retour.putExtra("testA", formNom);
+                //Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
 
 
+                // ?????? manque le listener sur le selected autocomplete etc...???
 
-                // on met l'arraylist dans un intent pour envoyer aux autres fragments???
-                // on vérifie si un doublon ???
+    /*            listeTemp.add(new Membre(nomET.getText().toString(),
+                                    prenomET.getText().toString(),
+                                    boutonSexe.getText().toString(),
+                                    spinnerFonctions.getText().toString(),
+                                    commentairesET.getText().toString()));
+*/
+/*
+                Toast.makeText(getActivity(), nomET.getText().toString() +
+                        prenomET.getText().toString() +
+                        Integer.toString(choixSexe) +
+                        //testc +
+                        //boutonSexe.getText().toString() +
+                        //spinnerFonctions.getText().toString() +
+                        commentairesET.getText().toString(), Toast.LENGTH_LONG).show();
+
+*/
+
             }
         });
 

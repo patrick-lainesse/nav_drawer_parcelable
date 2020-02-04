@@ -13,7 +13,7 @@ public class FragmentB extends Fragment {
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.frag_ajout_membres, container, false);
+        View view = inflater.inflate(R.layout.frag_enregistrer, container, false);
         //Activity activity = getActivity();
 
         setMessage(view);
@@ -25,6 +25,10 @@ public class FragmentB extends Fragment {
     private void setMessage(View v) {
 
         TextView textView = v.findViewById(R.id.fragB_message);
+        textView.setText("Allô");
+
+        TextView textView2 = v.findViewById(R.id.fragB_message2);
+        textView2.setText("Deuxième ligne de texte");
 
 
     }
