@@ -3,6 +3,7 @@ package com.example.tp1_exercice2;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,11 +27,16 @@ import java.util.List;
 
 
 public class FragmentA extends Fragment {
+
+    ArrayList<Membre> listMembre;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         // on crée un ArrayList pour stocker les membres créés mais non encore enregistrés au fichier
         ArrayList<Membre> listeTemp = new ArrayList<Membre>();
+
+        //List<Membre> listMembre = new ArrayList<Membre>();
 
         // on inflate le layout de l'activité ajouter membres dans le fragment
         View view = inflater.inflate(R.layout.frag_ajout_membres, container, false);
@@ -40,9 +46,9 @@ public class FragmentA extends Fragment {
         setAdapter(view, activity);
 
 
+
         String test = this.getArguments().getString("testMain");
         Toast.makeText(getActivity(), test, Toast.LENGTH_LONG).show();
-
 
 
         setBouton(view);        // bundle???
@@ -120,9 +126,11 @@ public class FragmentA extends Fragment {
                     formComment = commentairesET.getText().toString();
                 }
 
+
                 Membre premierMembre = new Membre("Demers", "Jacques", "Homme", "Entraîneur", "Jacques Demers a peut-être gagné la coupe Stanley, mais il ne savait pas lire. Ça ne l'a d'ailleurs pas empêché de devenir sénateur, et depuis, on attend plus ou moins patiemment l'annonce de sa mort.");
 
-                List<Membre> listMembre = new ArrayList<>();
+                //List<Membre> listMembre = new ArrayList<Membre>();
+                listMembre = new ArrayList<Membre>();
 
                 // remplacer Test pour fonction!!!???
                 listMembre.add(new Membre(formNom, formPrenom, formSexe, "Test", formComment));
@@ -130,31 +138,14 @@ public class FragmentA extends Fragment {
                 listMembre.add(premierMembre);
                 listMembre.add(premierMembre);
                 listMembre.add(premierMembre);
-                listMembre.add(premierMembre);
-                listMembre.add(premierMembre);
 
                 Intent intent = new Intent(getActivity(), MainActivity.class);
-                //intent.putExtra("testString", formNom);
-                //intent.putExtra("clé_listeMembres", premierMembre);
 
-                // rendu ici, problème
-                intent.putParcelableArrayListExtra("clé_listeMembres", listMembre);
+                // j'ai fait un cast sur listMembre, car la classe Membre implements Parcelable (comme dans les notes de cours)
+                // et la méthode putParcelableArrayListExtra requiert un ArrayList qui extends Parcelable comme argument
+                intent.putParcelableArrayListExtra("clé_listeMembres", (ArrayList<? extends Parcelable>) listMembre);
                 startActivity(intent);
 
-                // bon code ici???
-                //Toast.makeText(getActivity(), formNom + " " + formPrenom + " " + formSexe + " " + formComment, Toast.LENGTH_SHORT).show();
-
-
-/*
-                Toast.makeText(getActivity(), nomET.getText().toString() +
-                        prenomET.getText().toString() +
-                        Integer.toString(choixSexe) +
-                        //testc +
-                        //boutonSexe.getText().toString() +
-                        //spinnerFonctions.getText().toString() +
-                        commentairesET.getText().toString(), Toast.LENGTH_LONG).show();
-
-*/
 
             }
         });

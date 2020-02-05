@@ -21,7 +21,7 @@ public class Membre implements Parcelable {
     }
 
     // constructeur appelé lors de la lecture avec le Creator
-    protected Membre(Parcel in) {
+    public Membre(Parcel in) {
         nom = in.readString();
         prenom = in.readString();
         sexe = in.readString();

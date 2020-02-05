@@ -40,20 +40,22 @@ public class FragmentB extends Fragment {
         // on récupère une référence sur le recycler view pour y afficher
         // les infos des membres à ajouter au .txt
         RecyclerView recMembres = view.findViewById(R.id.fragB_recycler);
-        recMembres.setHasFixedSize(true);                           // essayer d'enlever ça???
+        //recMembres.setHasFixedSize(true);                           // essayer d'enlever ça???
         LinearLayoutManager llm = new LinearLayoutManager(view.getContext());
         //llm.setOrientation(LinearLayoutManager.VERTICAL);
 
+        String test = this.getArguments().getString("testMain");
+        List<Membre> listMembre = this.getArguments().getParcelableArrayList("cle_listeMain");
 
-        Membre premierMembre = new Membre("Demers", "Jacques", "Homme", "Entraîneur", "Jacques Demers a peut-être gagné la coupe Stanley, mais il ne savait pas lire. Ça ne l'a d'ailleurs pas empêché de devenir sénateur, et depuis, on attend plus ou moins patiemment l'annonce de sa mort.");
+        //Membre premierMembre = new Membre("Demers", "Jacques", "Homme", "Entraîneur", "Jacques Demers a peut-être gagné la coupe Stanley, mais il ne savait pas lire. Ça ne l'a d'ailleurs pas empêché de devenir sénateur, et depuis, on attend plus ou moins patiemment l'annonce de sa mort.");
 
-        List<Membre> listMembre = new ArrayList<>();
+        //List<Membre> listMembre = new ArrayList<>();
 
+/*        listMembre.add(premierMembre);
         listMembre.add(premierMembre);
         listMembre.add(premierMembre);
         listMembre.add(premierMembre);
-        listMembre.add(premierMembre);
-        listMembre.add(premierMembre);
+        listMembre.add(premierMembre);*/
 
         MembresAdapter mAdapter = new MembresAdapter(listMembre);
 

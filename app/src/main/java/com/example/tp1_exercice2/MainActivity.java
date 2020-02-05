@@ -24,6 +24,7 @@ package com.example.tp1_exercice2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
+    ArrayList<Membre> listeMembres;
+
     //private Bundle fragBundle;      // à nettoyer probablement
     private String fragString = "bye-bye";
 
@@ -56,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // on récupère le intent contenant l'ArrayList de membres ajoutés qui ne sont pas encore enregistrés en .txt
         Intent intent = getIntent();
-        //ArrayList<Membre> listeMembres = intent.getParcelableArrayListExtra("clé_listeMembres");
+        listeMembres = intent.getParcelableArrayListExtra("clé_listeMembres");
         //fragString = intent.getStringExtra("testString");       // à transformer en arraylist
 
         // à nettoyer
@@ -94,12 +97,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // https://abhiandroid.com/materialdesign/navigation-drawer#Drawer_Layout_In_Android
 
         // bundle et fragments array list
-        // https://stackoverflow.com/questions/39867847/android-passing-arraylistmodel-to-fragment-from-activity
         final ArrayList<Membre> membresTemp = new ArrayList<Membre>();
         Bundle bundle = new Bundle();
 
-        // test de bundle
-        bundle.putString("testMain", fragString);
+        bundle.putParcelableArrayList("cle_listeMain", (ArrayList<? extends Parcelable>) listeMembres);
+
         Fragment monFragment = null;
 
         // on vérifie l'option sélectionnée sur le drawer
