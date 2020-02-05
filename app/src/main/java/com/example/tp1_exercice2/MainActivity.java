@@ -56,7 +56,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // on récupère le intent contenant l'ArrayList de membres ajoutés qui ne sont pas encore enregistrés en .txt
         Intent intent = getIntent();
-        fragString = intent.getStringExtra("testString");       // à transformer en arraylist
+        //ArrayList<Membre> listeMembres = intent.getParcelableArrayListExtra("clé_listeMembres");
+        //fragString = intent.getStringExtra("testString");       // à transformer en arraylist
 
         // à nettoyer
         Toast.makeText(this, fragString, Toast.LENGTH_LONG).show();

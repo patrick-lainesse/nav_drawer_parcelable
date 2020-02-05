@@ -22,6 +22,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class FragmentA extends Fragment {
@@ -93,6 +94,7 @@ public class FragmentA extends Fragment {
                 String formSexe = null;
                 String formComment = null;
 
+
                 // vérification de la sélection du bouton radio ??? problème de pas capable de getText()???
                 int choixSexe = radioSexe.getCheckedRadioButtonId();
 
@@ -118,20 +120,31 @@ public class FragmentA extends Fragment {
                     formComment = commentairesET.getText().toString();
                 }
 
+                Membre premierMembre = new Membre("Demers", "Jacques", "Homme", "Entraîneur", "Jacques Demers a peut-être gagné la coupe Stanley, mais il ne savait pas lire. Ça ne l'a d'ailleurs pas empêché de devenir sénateur, et depuis, on attend plus ou moins patiemment l'annonce de sa mort.");
+
+                List<Membre> listMembre = new ArrayList<>();
+
+                // remplacer Test pour fonction!!!???
+                listMembre.add(new Membre(formNom, formPrenom, formSexe, "Test", formComment));
+
+                listMembre.add(premierMembre);
+                listMembre.add(premierMembre);
+                listMembre.add(premierMembre);
+                listMembre.add(premierMembre);
+                listMembre.add(premierMembre);
+
                 Intent intent = new Intent(getActivity(), MainActivity.class);
-                intent.putExtra("testString", formNom);
+                //intent.putExtra("testString", formNom);
+                //intent.putExtra("clé_listeMembres", premierMembre);
+
+                // rendu ici, problème
+                intent.putParcelableArrayListExtra("clé_listeMembres", listMembre);
                 startActivity(intent);
 
                 // bon code ici???
                 //Toast.makeText(getActivity(), formNom + " " + formPrenom + " " + formSexe + " " + formComment, Toast.LENGTH_SHORT).show();
 
 
-    /*            listeTemp.add(new Membre(nomET.getText().toString(),
-                                    prenomET.getText().toString(),
-                                    boutonSexe.getText().toString(),
-                                    spinnerFonctions.getText().toString(),
-                                    commentairesET.getText().toString()));
-*/
 /*
                 Toast.makeText(getActivity(), nomET.getText().toString() +
                         prenomET.getText().toString() +

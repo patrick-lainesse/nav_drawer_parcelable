@@ -17,5 +17,7 @@
     <string name="fonction">Fonction</string>
     <string name="commentaires">Commentaires</string>
     <string name="envoyer">Envoyer</string>
+    <string name="enregistrer_en_txt">Enregistrer txt</string>
+    <string name="vider_la_liste_sans_enregistrer">Vider</string>
 
 </resources>

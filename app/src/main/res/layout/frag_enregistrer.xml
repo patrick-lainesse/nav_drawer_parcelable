@@ -6,23 +6,37 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/fragB_message"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:layout_marginTop="100dp"
-        android:textSize="20dp"
-        android:fontFamily="@font/bagnard"/>
+        android:layout_marginBottom="20dp"
+        android:textSize="20sp"
+        android:fontFamily="@font/bagnard"
+        android:textStyle="bold"
+        android:gravity="center"/>
     <!--???? essayer plutôt de mettre dans l'app au complet-->
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/fragB_message2"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="100dp"
-        android:textSize="40dp"/>
+        android:orientation="horizontal"
+        android:layout_marginBottom="15dp">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/fragB_bouton_enregistrer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="@string/enregistrer_en_txt"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/fragB_bouton_vider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="@string/vider_la_liste_sans_enregistrer"/>
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragB_recycler"
