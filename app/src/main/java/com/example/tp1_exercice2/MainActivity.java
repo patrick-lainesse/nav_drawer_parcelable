@@ -10,6 +10,7 @@ package com.example.tp1_exercice2;
         Ressources utilisées:
         Icônes: https://material.io/resources/icons/?style=baseline
         TVAC, tutoriel material design: https://www.youtube.com/watch?v=VD3YItr9nMg
+        RecyclerView et Cards: https://www.binpress.com/android-recyclerview-cardview-guide/
 
         Ajouter les fragments au manifest????
 
