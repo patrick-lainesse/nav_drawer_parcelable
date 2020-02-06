@@ -1,7 +1,9 @@
 package com.example.tp1_exercice2;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,25 +16,82 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentB extends Fragment {
 
+    private List<Membre> listMembre;
 
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.frag_enregistrer, container, false);
 
-        setMessage(view);
         setCardMembre(view);
+        setBouton(view);
 
         return view;
 
+    }
+
+    private void setBouton(View view) {
+
+        MaterialButton boutonVider = view.findViewById(R.id.fragB_bouton_vider);
+        MaterialButton boutonEnregistrer = view.findViewById(R.id.fragB_bouton_enregistrer);
+
+        boutonVider.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vider(listMembre);
+            }
+        });
+
+        boutonEnregistrer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // vérifier si le fichier existe déjà????
+
+                // création du fichier pour écriture
+                ObjectOutputStream fichier = null;
+                try {
+                    fichier = new ObjectOutputStream(new FileOutputStream("membres.txt"));
+
+                    for (int i=0; i<listMembre.size(); i++) {
+                        fichier.writeObject(listMembre.get(i).getNom());
+                        fichier.writeObject(listMembre.get(i).getPrenom());
+                        fichier.writeObject(listMembre.get(i).getSexe());
+                        fichier.writeObject(listMembre.get(i).getFonction());
+                        fichier.writeObject(listMembre.get(i).getCommentaires());
+
+                        //fichier.flush();
+                        //fichier.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private void vider(List<Membre> listMembre) {
+
+        listMembre = null;
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+
+        // j'ai fait un cast sur listMembre, car la classe Membre implements Parcelable (comme dans les notes de cours)
+        // et la méthode putParcelableArrayListExtra requiert un ArrayList qui extends Parcelable comme argument
+        intent.putParcelableArrayListExtra("clé_listeMembres", (ArrayList<? extends Parcelable>) listMembre);
+        startActivity(intent);
     }
 
     private void setCardMembre(View view) {
@@ -45,17 +104,15 @@ public class FragmentB extends Fragment {
         //llm.setOrientation(LinearLayoutManager.VERTICAL);
 
         String test = this.getArguments().getString("testMain");
-        List<Membre> listMembre = this.getArguments().getParcelableArrayList("cle_listeMain");
+        listMembre = this.getArguments().getParcelableArrayList("cle_listeMain");
 
-        //Membre premierMembre = new Membre("Demers", "Jacques", "Homme", "Entraîneur", "Jacques Demers a peut-être gagné la coupe Stanley, mais il ne savait pas lire. Ça ne l'a d'ailleurs pas empêché de devenir sénateur, et depuis, on attend plus ou moins patiemment l'annonce de sa mort.");
-
-        //List<Membre> listMembre = new ArrayList<>();
-
-/*        listMembre.add(premierMembre);
-        listMembre.add(premierMembre);
-        listMembre.add(premierMembre);
-        listMembre.add(premierMembre);
-        listMembre.add(premierMembre);*/
+        // on vérifie si la liste est vide, si oui, on l'initialise
+        if(listMembre == null) {
+            listMembre = new ArrayList<Membre>();
+            setMessage(view, true);
+        } else {
+            setMessage(view, false);
+        }
 
         MembresAdapter mAdapter = new MembresAdapter(listMembre);
 
@@ -64,13 +121,16 @@ public class FragmentB extends Fragment {
 
     }
 
-    private void setMessage(View v) {
+    private void setMessage(View v, Boolean listeNulle) {
 
         TextView textView = v.findViewById(R.id.fragB_message);
-        /*TextView textView2 = v.findViewById(R.id.fragB_message2);
-        String test = this.getArguments().getString("testMain");*/
 
-        textView.setText("Liste des membres à ajouter");
+        if(!listeNulle) {
+            textView.setText("Liste des membres à ajouter");
+        } else {
+            textView.setText("Aucun membre à ajouter\n pour le moment.");
+        }
+
         // ??? à ajouter à String.xml
 
     }

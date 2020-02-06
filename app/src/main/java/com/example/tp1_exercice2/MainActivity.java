@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ArrayList<Membre> listeMembres;
 
     //private Bundle fragBundle;      // à nettoyer probablement
-    private String fragString = "bye-bye";
+    //private String fragString = "bye-bye";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //fragString = intent.getStringExtra("testString");       // à transformer en arraylist
 
         // à nettoyer
-        Toast.makeText(this, fragString, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, fragString, Toast.LENGTH_LONG).show();
 
         // appel de la méthode pour remplir le drawer
         setDrawerLayout();
