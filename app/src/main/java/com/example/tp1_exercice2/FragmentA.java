@@ -168,15 +168,17 @@ public class FragmentA extends Fragment {
 
                 Membre premierMembre = new Membre("Demers", "Jacques", "Homme", "Entraîneur", "Jacques Demers a peut-être gagné la coupe Stanley, mais il ne savait pas lire. Ça ne l'a d'ailleurs pas empêché de devenir sénateur, et depuis, on attend plus ou moins patiemment l'annonce de sa mort.");
 
+                Membre deuxMembre = new Membre("Lacerte-Coulee", "Lyne", "Femme", "Autre", "Jacques Demers a peut-être gagné la coupe Stanley, mais il ne savait pas lire. Ça ne l'a d'ailleurs pas empêché de devenir sénateur, et depuis, on attend plus ou moins patiemment l'annonce de sa mort.");
+
                 //List<Membre> listMembre = new ArrayList<Membre>();
                 //listMembre = new ArrayList<Membre>();
 
                 // remplacer Test pour fonction!!!???
-                listMembre.add(new Membre(formNom, formPrenom, formSexe, formFonction, formComment));
+                //listMembre.add(new Membre(formNom, formPrenom, formSexe, formFonction, formComment));
 
-/*                listMembre.add(premierMembre);
                 listMembre.add(premierMembre);
-                listMembre.add(premierMembre);*/
+                listMembre.add(deuxMembre);
+                listMembre.add(premierMembre);
 
                 Intent intent = new Intent(getActivity(), MainActivity.class);
 

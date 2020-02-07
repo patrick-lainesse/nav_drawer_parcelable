@@ -23,6 +23,50 @@
         android:gravity="center"
         android:visibility="gone"/>
 
+    <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:cardCornerRadius="0dp">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="160sp"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_margin="5dp"
+                android:text="Prénom et nom"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Sexe"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="85sp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Fonction"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="italic"
+                android:layout_margin="5dp"
+                android:text="Commentaires"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </com.google.android.material.card.MaterialCardView>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragC_recycler"
         android:scrollbars="vertical"

@@ -1,6 +1,7 @@
 package com.example.tp1_exercice2;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -20,10 +21,13 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +47,7 @@ public class FragmentB extends Fragment {
 
     }
 
-    private void setBouton(View view) {
+    private void setBouton(final View view) {
 
         MaterialButton boutonVider = view.findViewById(R.id.fragB_bouton_vider);
         MaterialButton boutonEnregistrer = view.findViewById(R.id.fragB_bouton_enregistrer);
@@ -62,24 +66,61 @@ public class FragmentB extends Fragment {
                 // vérifier si le fichier existe déjà????
 
                 // création du fichier pour écriture
-                ObjectOutputStream fichier = null;
+                //ObjectOutputStream fichier = null;
+
                 try {
-                    fichier = new ObjectOutputStream(new FileOutputStream("membres.txt"));
+
+
+                    FileOutputStream fichierEcrit = view.getContext().openFileOutput("membres.txt", Context.MODE_PRIVATE);
+                    ObjectOutputStream fichier = new ObjectOutputStream(fichierEcrit);
+/*
+
+                    // test réussi d'un mot simple
+                    Writer out = new OutputStreamWriter(fichierEcrit);
+                    out.write("allo");
+                    out.close();
+*/
+
+                    //fichier = new ObjectOutputStream(new FileOutputStream("membres.txt"));
+
+
+                    // on commence par écrire le nombre d'éléments au total dans le fichier
+                    fichier.writeInt(listMembre.size());
+                    fichier.writeChar(';');
 
                     for (int i=0; i<listMembre.size(); i++) {
+                        fichier.writeObject(listMembre.get(i));
+                        fichier.writeChar(';');
+
+/*
+
                         fichier.writeObject(listMembre.get(i).getNom());
+                        fichier.writeObject(";");
                         fichier.writeObject(listMembre.get(i).getPrenom());
+                        fichier.writeObject(";");
                         fichier.writeObject(listMembre.get(i).getSexe());
+                        fichier.writeObject(";");
                         fichier.writeObject(listMembre.get(i).getFonction());
+                        fichier.writeObject(";");
                         fichier.writeObject(listMembre.get(i).getCommentaires());
+                        fichier.writeObject(";");
+*//*
+
 
                         //fichier.flush();
-                        //fichier.close();
+                        //fichier.close(); */
                     }
+
+
+                    fichier.flush();
+                    fichier.close();
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
+
+            // pas oublier de mettre ici le vider????
         });
     }
 

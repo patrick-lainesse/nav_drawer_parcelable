@@ -3,7 +3,9 @@ package com.example.tp1_exercice2;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Membre implements Parcelable {
+import java.io.Serializable;
+
+public class Membre implements Parcelable, Serializable {
 
     private String nom;
     private String prenom;
@@ -63,7 +65,7 @@ public class Membre implements Parcelable {
         return 0;
     }
 
-    public static final Creator<Membre> CREATOR = new Creator<Membre>() {
+    public static final Parcelable.Creator<Membre> CREATOR = new Parcelable.Creator<Membre>() {
         @Override
         public Membre createFromParcel(Parcel in) {
             return new Membre(in);

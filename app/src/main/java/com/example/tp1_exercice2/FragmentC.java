@@ -4,13 +4,24 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,8 +42,48 @@ public class FragmentC extends Fragment {
 
     private void lireFichier(View view) {
 
-        // va falloir remplacer ça par la lecture du txt
-        //listMembre = this.getArguments().getParcelableArrayList("cle_listeMain");
+        // va falloir remplacer ça par la lecture du txt ??????
+        listMembre = this.getArguments().getParcelableArrayList("cle_listeMain");
+
+        try {
+
+
+            ObjectInputStream fichierIn = new ObjectInputStream(new FileInputStream(new File("membres.txt")));
+
+            /*
+            // test mot simple réussi
+            FileInputStream fis = view.getContext().openFileInput("membres.txt");
+            BufferedReader r = new BufferedReader(new InputStreamReader(fis));
+            String line = r.readLine();
+            r.close();
+            Toast.makeText(getActivity(), line, Toast.LENGTH_LONG).show();
+*/
+
+            // on récupère le nombre de membres dans le fichier
+            int nbMembres = fichierIn.readInt();
+            char separateur = fichierIn.readChar();
+
+            for (int i=0; i<nbMembres; i++)
+            {
+                listMembre.add((Membre) fichierIn.readObject());
+                separateur = fichierIn.readChar();
+            }
+
+
+            fichierIn.close();
+
+        } catch (FileNotFoundException e)
+        {
+            Toast.makeText(getActivity(), "Le fichier membres.txt n'existe pas.", Toast.LENGTH_LONG).show();
+        }
+        catch (IOException e)
+        {
+            Toast.makeText(getActivity(), "Erreur d'entrée/sortie de fichier.", Toast.LENGTH_LONG).show();
+        }
+
+        catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
         // on vérifie si la liste est vide, si oui, on l'initialise
         if(listMembre == null) {
@@ -62,9 +113,19 @@ public class FragmentC extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(view.getContext());
         //llm.setOrientation(LinearLayoutManager.VERTICAL);
 
+        // on crée un en-tête
+        Membre membreEnTete = new Membre("Nom", "Prenom", "Sexe", "Fonction", "Commentaires");
+        List<Membre> listEnTete = new ArrayList<>();
+
+        listEnTete.add(membreEnTete);
+
+        MembresAdapterTable mAdapter =  new MembresAdapterTable(listEnTete);
+        recMembres.setAdapter(mAdapter);
+        //recMembres.setLayoutManager(llm);
 
 
-        MembresAdapter mAdapter = new MembresAdapter(listMembre);
+        //MembresAdapterTable mAdapter = new MembresAdapterTable(listMembre);
+        mAdapter = new MembresAdapterTable(listMembre);
 
         recMembres.setAdapter(mAdapter);
         recMembres.setLayoutManager(llm);
