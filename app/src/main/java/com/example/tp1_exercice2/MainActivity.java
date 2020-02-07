@@ -116,6 +116,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 monFragment = new FragmentB();
                 break;
 
+            case R.id.menu_lister:
+                monFragment = new FragmentC();
+                break;
+
                 default:
                     monFragment = null;
                     // si le temps: rajouter un fragment "accueuil" qui imprime un message et/ou le nombre de membres non enregistrés au fichier encore

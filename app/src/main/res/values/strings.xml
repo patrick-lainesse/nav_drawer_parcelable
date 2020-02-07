@@ -19,5 +19,7 @@
     <string name="envoyer">Envoyer</string>
     <string name="enregistrer_en_txt">Enregistrer txt</string>
     <string name="vider_la_liste_sans_enregistrer">Vider</string>
+    <string name="liste_des_membres">Liste des membres</string>
+    <string name="erreur_txt">Impossible d\'extraire des données du fichier .txt</string>
 
 </resources>

@@ -103,7 +103,6 @@ public class FragmentB extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(view.getContext());
         //llm.setOrientation(LinearLayoutManager.VERTICAL);
 
-        String test = this.getArguments().getString("testMain");
         listMembre = this.getArguments().getParcelableArrayList("cle_listeMain");
 
         // on vérifie si la liste est vide, si oui, on l'initialise
