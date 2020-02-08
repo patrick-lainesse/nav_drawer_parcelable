@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/fragC_message"
+        android:id="@+id/fragC_titre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
@@ -12,10 +12,10 @@
         android:textSize="20sp"
         android:fontFamily="@font/bagnard"
         android:textStyle="bold"
-        android:gravity="center"
-        android:text="@string/liste_des_membres"/>
+        android:gravity="center" />
     <!--???? essayer plutôt de mettre dans l'app au complet-->
 
+<!--    Les éléments suivants sont cachés au départ et affichés selon ce qui est demandé à l'exécution-->
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/fragC_msg_cache"
         android:layout_width="match_parent"
@@ -23,7 +23,71 @@
         android:gravity="center"
         android:visibility="gone"/>
 
-    <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fragD_nom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:hint="@string/nom"
+        android:visibility="gone">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragD_nom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fragD_prenom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:hint="@string/prenom"
+        android:visibility="gone">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragD_prenom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/fragD_bouton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lister"
+        android:visibility="gone"/>
+
+    <RadioGroup
+        android:id="@+id/fragE_radioSexe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <RadioButton
+            android:id="@+id/fragE_radioHomme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/homme"/>
+
+        <RadioButton
+            android:id="@+id/fragE_radioFemme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/femme"/>
+
+    </RadioGroup>
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"

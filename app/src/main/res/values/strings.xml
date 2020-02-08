@@ -21,5 +21,10 @@
     <string name="vider_la_liste_sans_enregistrer">Vider</string>
     <string name="liste_des_membres">Liste des membres</string>
     <string name="erreur_txt">Impossible d\'extraire des données du fichier .txt</string>
+    <string name="rechercher_membre">Rechercher un membre</string>
+    <string name="recherche_sexe">Rechercher par sexe</string>
+    <string name="liste_femmes_fonction">Liste par sexe féminin et leur fonction</string>
+    <string name="choix_sexe_afficher">Sélectionnez le sexe des membres que vous souhaitez afficher</string>
+    <string name="entrez_nom_cherche">Entrez le nom et le prénom de la personne que vous recherchez</string>
 
 </resources>

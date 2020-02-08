@@ -118,7 +118,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.menu_lister:
                 monFragment = new FragmentC();
+                bundle.putChar("char_choix", 'C');
                 break;
+
+            case R.id.menu_rechercher:
+                monFragment = new FragmentC();
+                bundle.putChar("char_choix", 'D');
+                break;
+
+            case R.id.menu_liste_sexe:
+                monFragment = new FragmentC();
+                bundle.putChar("char_choix", 'E');
+                break;
+
 
                 default:
                     monFragment = null;
