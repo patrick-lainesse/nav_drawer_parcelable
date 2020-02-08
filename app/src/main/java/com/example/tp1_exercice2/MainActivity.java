@@ -5,16 +5,14 @@ package com.example.tp1_exercice2;
         Matricule: 740302
         Dans le cadre du cours IFT 1155, Hiver 2020
 
+        Application conçue et testée sur un émulateur Nexus 7, API 28 AVD et un cellulaire Motorola MotoG3
         Le thème material design a été utilisé pour la réalisation de cet exercice.
 
         Ressources utilisées:
         Icônes: https://material.io/resources/icons/?style=baseline
+        Navigation Drawer: https://abhiandroid.com/materialdesign/navigation-drawer#Drawer_Layout_In_Android
         TVAC, tutoriel material design: https://www.youtube.com/watch?v=VD3YItr9nMg
         RecyclerView et Cards: https://www.binpress.com/android-recyclerview-cardview-guide/
-
-        Ajouter les fragments au manifest????
-
-        Application testée sur un appareil Nexus 7, API 28 AVD
 
 
         À faire:
@@ -43,40 +41,31 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Toolbar toolbar;
-
-    private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
-
-    ArrayList<Membre> listeMembres;
-
-    //private Bundle fragBundle;      // à nettoyer probablement
-    //private String fragString = "bye-bye";
+    private ArrayList<Membre> listeMembres;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // on récupère le intent contenant l'ArrayList de membres ajoutés qui ne sont pas encore enregistrés en .txt
-        Intent intent = getIntent();
+        // on récupère le intent contenant l'ArrayList de membres du fragmentA (ajout membres)
+        // pour le passer au fragmentB (enregistrer en .txt)
+        intent = getIntent();
         listeMembres = intent.getParcelableArrayListExtra("clé_listeMembres");
-        //fragString = intent.getStringExtra("testString");       // à transformer en arraylist
 
-        // à nettoyer
-        //Toast.makeText(this, fragString, Toast.LENGTH_LONG).show();
-
-        // appel de la méthode pour remplir le drawer
+        // appel de la méthode pour mettre les choix dans le navdrawer
         setDrawerLayout();
     }
 
+    // méthode qui ajoute les options au navigation drawer
     protected void setDrawerLayout() {
 
-        toolbar = findViewById(R.id.barre_navigation);
+        Toolbar toolbar = findViewById(R.id.barre_navigation);
         setSupportActionBar(toolbar);
 
-        drawerLayout = findViewById(R.id.navigation_layout);
-        navigationView = findViewById(R.id.nav_view);
+        DrawerLayout drawerLayout = findViewById(R.id.navigation_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
 
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(
                 this,
@@ -92,16 +81,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    // méthode qui réagit à un clic sur une option du navdrawer
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-        // https://abhiandroid.com/materialdesign/navigation-drawer#Drawer_Layout_In_Android
-
-        // bundle et fragments array list
-        final ArrayList<Membre> membresTemp = new ArrayList<Membre>();
+        // on crée un arraylist pour stocker les membres ajoutés au fragmentA
+        // ainsi qu'un bundle pour le passer au fragmentB
+        ArrayList<Membre> listMembres; //= new ArrayList<Membre>() ????
+        listMembres = intent.getParcelableArrayListExtra("clé_listMembres");
         Bundle bundle = new Bundle();
 
         bundle.putParcelableArrayList("cle_listeMain", (ArrayList<? extends Parcelable>) listeMembres);
+        bundle.putParcelableArrayList("cle_listMembres", (ArrayList<? extends Parcelable>) listMembres);
 
         Fragment monFragment = null;
 
@@ -142,10 +133,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     monFragment = new FragmentB();
         }
 
-        // suite test
-        monFragment.setArguments(bundle);
-
         // placer le layout correspondant à la sélection dans le fragment
+        monFragment.setArguments(bundle);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.activity_main_fragment_layout, monFragment);
         fragmentTransaction.commit();

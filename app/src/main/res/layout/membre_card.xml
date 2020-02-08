@@ -21,9 +21,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- width ??? voir si on peut pas plutôt faire du responsive car c'est laid-->
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/card_nom"
-            android:layout_width="wrap_content"
+            android:layout_width="120sp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"

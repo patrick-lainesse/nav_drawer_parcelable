@@ -36,7 +36,6 @@ public class FragmentC extends Fragment {
     private View vue = null;
     private ArrayList<Membre> listMembre;
     private ArrayList<Membre> listChoix;
-    private char choixDrawer;
 
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,9 +54,9 @@ public class FragmentC extends Fragment {
         MaterialTextView titreMTV = view.findViewById(R.id.fragC_titre);
 
         // va falloir remplacer ça par la lecture du txt ??????
-        listMembre = this.getArguments().getParcelableArrayList("cle_listeMain");
-        choixDrawer = this.getArguments().getChar("char_choix");
-        listChoix = new ArrayList<Membre>();;
+        listMembre = this.getArguments().getParcelableArrayList("cle_listMembres");
+        char choixDrawer = this.getArguments().getChar("char_choix");
+        listChoix = new ArrayList<Membre>();
 
         try {
 
@@ -199,8 +198,6 @@ public class FragmentC extends Fragment {
 
                 int choixSexe = rg.getCheckedRadioButtonId();
                 listChoix.clear();
-
-                Toast.makeText(getActivity(), Integer.toString(choixSexe) + " " + Integer.toString(R.id.fragE_radioFemme), Toast.LENGTH_LONG);
 
                 if (choixSexe == R.id.fragE_radioFemme)
                 {

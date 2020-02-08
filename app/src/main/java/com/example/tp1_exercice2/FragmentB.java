@@ -118,6 +118,10 @@ public class FragmentB extends Fragment {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                intent.putParcelableArrayListExtra("clé_listMembres", (ArrayList<? extends Parcelable>) listMembre);
+                startActivity(intent);
+                vider(listMembre);
             }
 
             // pas oublier de mettre ici le vider????

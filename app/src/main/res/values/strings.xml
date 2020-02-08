@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Créateur de listes</string>
+    <string name="app_name">Listes de membres</string>
     <string name="ajouter_membres">Ajouter membres</string>
     <string name="enregistrer">Enregistrer</string>
     <string name="lister">Lister</string>
