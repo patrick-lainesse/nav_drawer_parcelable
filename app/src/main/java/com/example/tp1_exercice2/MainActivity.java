@@ -20,6 +20,7 @@ package com.example.tp1_exercice2;
         À faire:
         - penser à un active text overlay (pour l'activité courante highlightée)
         - utiliser l'outil palette bitmap
+        - tout bogue quand la liste est vide
         */
 
 import android.content.Intent;
@@ -131,11 +132,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 bundle.putChar("char_choix", 'E');
                 break;
 
+            case R.id.menu_liste_fem:
+                monFragment = new FragmentC();
+                bundle.putChar("char_choix", 'F');
+                break;
 
+                // par défaut, on montre les membres qui n'ont pas encore été ajoutés au fichier txt
                 default:
-                    monFragment = null;
-                    // si le temps: rajouter un fragment "accueuil" qui imprime un message et/ou le nombre de membres non enregistrés au fichier encore
-                    // ça pourrait être le fragmentB pour montrer les membres en "cards" qui ne sont pas encore ajoutés à la liste
+                    monFragment = new FragmentB();
         }
 
         // suite test

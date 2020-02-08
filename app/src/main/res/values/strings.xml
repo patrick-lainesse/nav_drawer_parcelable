@@ -24,7 +24,9 @@
     <string name="rechercher_membre">Rechercher un membre</string>
     <string name="recherche_sexe">Rechercher par sexe</string>
     <string name="liste_femmes_fonction">Liste par sexe féminin et leur fonction</string>
-    <string name="choix_sexe_afficher">Sélectionnez le sexe des membres que vous souhaitez afficher</string>
-    <string name="entrez_nom_cherche">Entrez le nom et le prénom de la personne que vous recherchez</string>
+    <string name="choix_sexe_afficher">Sélectionnez le sexe des membres\n que vous souhaitez afficher</string>
+    <string name="entrez_nom_cherche">Entrez le nom et le prénom\n de la personne que vous recherchez</string>
+    <string name="membre_inexistant">Membre inexistant</string>
+    <string name="aucun_sexe">Aucun membre du sexe sélectionné</string>
 
 </resources>

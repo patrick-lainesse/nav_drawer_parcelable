@@ -106,15 +106,6 @@ public class FragmentA extends Fragment {
     // fonction pour réagir au clic sur le bouton "envoyer"
     public void setBouton(View v) {
 
-/*        // on récupère les références sur les différents champs du formulaire
-        final TextInputEditText nomET = v.findViewById(R.id.fragA_nom);
-        final TextInputEditText prenomET = v.findViewById(R.id.fragA_prenom);
-        final RadioGroup radioSexe = v.findViewById(R.id.fragA_radioSexe);
-        final AutoCompleteTextView spinnerFonctions = v.findViewById(R.id.fragA_menuFonction);
-        final TextInputEditText commentairesET = v.findViewById(R.id.fragA_commentaires);
-        Button button = v.findViewById(R.id.fragA_bouton_envoyer);*/
-
-
         // on récupère les références sur les différents champs du formulaire
         nomET = v.findViewById(R.id.fragA_nom);
         prenomET = v.findViewById(R.id.fragA_prenom);

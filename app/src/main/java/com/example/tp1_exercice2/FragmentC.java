@@ -33,6 +33,7 @@ import java.util.List;
 
 public class FragmentC extends Fragment {
 
+    private View vue = null;
     private ArrayList<Membre> listMembre;
     private ArrayList<Membre> listChoix;
     private char choixDrawer;
@@ -43,7 +44,8 @@ public class FragmentC extends Fragment {
         View view = inflater.inflate(R.layout.fragc_lister, container, false);
 
         lireFichier(view);
-        //setTable(view);
+
+        vue = view;
 
         return view;
     }
@@ -55,7 +57,7 @@ public class FragmentC extends Fragment {
         // va falloir remplacer ça par la lecture du txt ??????
         listMembre = this.getArguments().getParcelableArrayList("cle_listeMain");
         choixDrawer = this.getArguments().getChar("char_choix");
-        listChoix = null;
+        listChoix = new ArrayList<Membre>();;
 
         try {
 
@@ -101,34 +103,37 @@ public class FragmentC extends Fragment {
         if(listMembre == null) {
             listMembre = new ArrayList<Membre>();
             setMessage(view, Integer.toString(R.string.erreur_txt));
-        } else if (choixDrawer == 'C'){
+        }
+
+        // transformer en switch?????
+        else if (choixDrawer == 'C'){
             setTable(view, listMembre);
             titreMTV.setText(R.string.liste_des_membres);
         } else if (choixDrawer == 'D') {
-            setNomPrenom(view);
+            setNomPrenom(view, listMembre);
             titreMTV.setText(R.string.rechercher_membre);
         } else if (choixDrawer == 'E') {
-            setRadio(view);
             titreMTV.setText(R.string.recherche_sexe);
-            setMessage(view, Integer.toString(R.string.choix_sexe_afficher));
+            setMessage(view, getResources().getString(R.string.choix_sexe_afficher));
+            setRadio(view);
         } else if (choixDrawer == 'F') {
 
             titreMTV.setText(R.string.liste_femmes_fonction);
             for(int i=0; i<listMembre.size(); i++)
             {
-                if(listMembre.get(i).getSexe() == "Femme")
+                if(listMembre.get(i).getSexe().equals("Femme"))
                 {
                     listChoix.add(listMembre.get(i));
                 }
             }
-            setTable(view, listChoix);
+            //setTable(view, listChoix);
         }
 
 
     }
 
     // fonction qui fait apparaître les text input entrer le nom à rechercher
-    private void setNomPrenom(final View view) {
+    private void setNomPrenom(final View view, final ArrayList<Membre> listMembre) {
 
         TextInputLayout layoutNom = view.findViewById(R.id.fragD_nom_layout);
         TextInputLayout layoutPrenom = view.findViewById(R.id.fragD_prenom_layout);
@@ -144,8 +149,8 @@ public class FragmentC extends Fragment {
             @Override
             public void onClick(View v) {
 
-                TextInputEditText nomTIET = v.findViewById(R.id.fragD_nom);
-                TextInputEditText prenomTIET = v.findViewById(R.id.fragD_prenom);
+                TextInputEditText nomTIET = vue.findViewById(R.id.fragD_nom);
+                TextInputEditText prenomTIET = vue.findViewById(R.id.fragD_prenom);
 
                 String nomCherche = null;
                 String prenomCherche = null;
@@ -158,17 +163,26 @@ public class FragmentC extends Fragment {
                     prenomCherche = prenomTIET.getText().toString();
                 }
 
-                listChoix = null;
+                listChoix.clear();
 
-                for(int i=0; i<listMembre.size(); i++) {
-                    if(listMembre.get(i).getNom().equals(nomCherche)) {
-                        if(listMembre.get(i).getPrenom().equals(prenomCherche)) {
-                            listChoix.add(listMembre.get(i));
+                if(nomCherche != null && prenomCherche != null) {
+                    for (int i = 0; i < listMembre.size(); i++) {
+
+                        if (listMembre.get(i).getNom().toUpperCase().equals(nomCherche.toUpperCase())) {
+                            if (listMembre.get(i).getPrenom().toUpperCase().equals(prenomCherche.toUpperCase())) {
+                                listChoix.add(listMembre.get(i));
+                            }
                         }
                     }
                 }
 
-                setTable(view, listChoix);
+                // si on ne trouve pas, on affiche un message; sinon, on affiche les membres trouvés
+                if(listChoix.size() == 0) {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.membre_inexistant), Toast.LENGTH_LONG).show();
+                }
+                else {
+                    setTable(view, listChoix);
+                }
             }
         });
     }
@@ -184,13 +198,15 @@ public class FragmentC extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
 
                 int choixSexe = rg.getCheckedRadioButtonId();
-                listChoix = new ArrayList<Membre>();
+                listChoix.clear();
 
-                if (choixSexe == R.id.fragA_radioFemme)
+                Toast.makeText(getActivity(), Integer.toString(choixSexe) + " " + Integer.toString(R.id.fragE_radioFemme), Toast.LENGTH_LONG);
+
+                if (choixSexe == R.id.fragE_radioFemme)
                 {
                     for(int i=0; i<listMembre.size(); i++)
                     {
-                        if(listMembre.get(i).getSexe() == "Femme")
+                        if(listMembre.get(i).getSexe().equals("Femme"))
                         {
                             listChoix.add(listMembre.get(i));
                         }
@@ -199,13 +215,20 @@ public class FragmentC extends Fragment {
                     {
                         for(int i=0; i<listMembre.size(); i++)
                         {
-                            if(listMembre.get(i).getSexe() == "Homme")
+                            if(listMembre.get(i).getSexe().equals("Homme"))
                             {
                                 listChoix.add(listMembre.get(i));
                             }
                         }
                     }
-                setTable(view, listChoix);
+
+                // si on ne trouve pas, on affiche un message; sinon, on affiche les membres trouvés
+                if(listChoix.size() == 0) {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.aucun_sexe), Toast.LENGTH_LONG).show();
+                }
+                else {
+                    setTable(vue, listChoix);
+                }
             }
         });
     }

@@ -1,141 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/fragC_titre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="20dp"
-        android:textSize="20sp"
-        android:fontFamily="@font/bagnard"
-        android:textStyle="bold"
-        android:gravity="center" />
-    <!--???? essayer plutôt de mettre dans l'app au complet-->
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-<!--    Les éléments suivants sont cachés au départ et affichés selon ce qui est demandé à l'exécution-->
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/fragC_msg_cache"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:visibility="gone"/>
+    <LinearLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/fragD_nom_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:hint="@string/nom"
-        android:visibility="gone">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/fragD_nom"
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/fragC_titre"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </com.google.android.material.textfield.TextInputEditText>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="20sp"
+            android:fontFamily="@font/bagnard"
+            android:textStyle="bold"
+            android:gravity="center" />
+        <!--???? essayer plutôt de mettre dans l'app au complet-->
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/fragD_prenom_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:hint="@string/prenom"
-        android:visibility="gone">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/fragD_prenom"
+        <!--    Les éléments suivants sont cachés au départ et affichés selon ce qui est demandé à l'exécution-->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/fragC_msg_cache"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </com.google.android.material.textfield.TextInputEditText>
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/fragD_bouton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/lister"
-        android:visibility="gone"/>
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility="gone"/>
 
-    <RadioGroup
-        android:id="@+id/fragE_radioSexe"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="gone">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fragD_nom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:hint="@string/nom"
+            android:visibility="gone">
 
-        <RadioButton
-            android:id="@+id/fragE_radioHomme"
-            android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fragD_nom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fragD_prenom_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:text="@string/homme"/>
+            android:hint="@string/prenom"
+            android:visibility="gone">
 
-        <RadioButton
-            android:id="@+id/fragE_radioFemme"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fragD_prenom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/fragD_bouton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="@string/femme"/>
+            android:text="@string/lister"
+            android:visibility="gone"/>
 
-    </RadioGroup>
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        app:cardCornerRadius="0dp">
-
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <RadioGroup
+            android:id="@+id/fragE_radioSexe"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="160sp"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_margin="5dp"
-                android:text="Prénom et nom"/>
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="55dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Sexe"/>
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="85sp"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Fonction"/>
-
-            <com.google.android.material.textview.MaterialTextView
+            <RadioButton
+                android:id="@+id/fragE_radioHomme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="italic"
-                android:layout_margin="5dp"
-                android:text="Commentaires"/>
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/homme"/>
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+            <RadioButton
+                android:id="@+id/fragE_radioFemme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/femme"/>
 
-    </com.google.android.material.card.MaterialCardView>
+        </RadioGroup>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fragC_recycler"
-        android:scrollbars="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="15dp"/>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            app:cardCornerRadius="0dp">
 
-</LinearLayout>
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="160sp"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_margin="5dp"
+                    android:text="Prénom et nom"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Sexe"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="85sp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Fonction"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="italic"
+                    android:layout_margin="5dp"
+                    android:text="Commentaires"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fragC_recycler"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="15dp"/>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
