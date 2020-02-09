@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         intent = getIntent();
         listeMembres = intent.getParcelableArrayListExtra("cle_listeMembres");
 
-        listMembres = new ArrayList<Membre>();
+        //listMembres = new ArrayList<Membre>();
         listMembres = intent.getParcelableArrayListExtra("cle_listMembres");
 
         // appel de la méthode pour mettre les choix dans le navdrawer
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Toast.makeText(this, "vide!", Toast.LENGTH_LONG).show();
             //Toast.makeText(this, listMembres.get(2).getNom().toString(), Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(this, listMembres.get(0).getNom(), Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, listMembres.get(0).getNom(), Toast.LENGTH_LONG).show();
         }
 
         bundle.putParcelableArrayList("cle_listeMain", (ArrayList<? extends Parcelable>) listeMembres);

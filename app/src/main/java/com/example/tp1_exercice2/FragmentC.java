@@ -28,12 +28,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+// plante lorsque vide avec l'option Lister????
+// la même classe est utilisée pour toutes les fonctions qui nécessitent de lister, car seule une petite
+// partie du code change selon le choix effectué sur le navigation drawer
 public class FragmentC extends Fragment {
 
-    //private View vue = null;
     private ArrayList<Membre> listMembre;
     private ArrayList<Membre> listChoix;
 
@@ -41,10 +45,7 @@ public class FragmentC extends Fragment {
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragc_lister, container, false);
-
         lireFichier(view);
-
-        //vue = view;
 
         return view;
     }
@@ -54,14 +55,24 @@ public class FragmentC extends Fragment {
         MaterialTextView titreMTV = view.findViewById(R.id.fragC_titre);
 
         // va falloir remplacer ça par la lecture du txt ??????
-        listMembre = this.getArguments().getParcelableArrayList("cle_listMembres");
+        //listMembre = this.getArguments().getParcelableArrayList("cle_listeMain");
+
+        // on récupère l'option qui a été sélectionnée sur le navigation drawer
         char choixDrawer = this.getArguments().getChar("char_choix");
         listChoix = new ArrayList<Membre>();
+        listMembre = new ArrayList<Membre>();
+
+        ObjectInputStream input;
+        String filename = "membres.txt";
 
         try {
 
+            input = new ObjectInputStream(new FileInputStream(new File(new File(getActivity().getFilesDir(), "")+File.separator+filename)));
+            Membre membreLu = (Membre) input.readObject();
+            listMembre.add(membreLu);
+            input.close();
 
-            ObjectInputStream fichierIn = new ObjectInputStream(new FileInputStream(new File("membres.txt")));
+            //ObjectInputStream fichierIn = new ObjectInputStream(new FileInputStream(new File("membres.txt")));
 
             /*
             // test mot simple réussi
@@ -71,7 +82,7 @@ public class FragmentC extends Fragment {
             r.close();
             Toast.makeText(getActivity(), line, Toast.LENGTH_LONG).show();
 */
-
+/*
             // on récupère le nombre de membres dans le fichier
             int nbMembres = fichierIn.readInt();
             char separateur = fichierIn.readChar();
@@ -83,18 +94,19 @@ public class FragmentC extends Fragment {
             }
 
 
-            fichierIn.close();
+            fichierIn.close();*/
 
         } catch (FileNotFoundException e)
         {
+            e.printStackTrace();
+            // mettre en string res ?????
             Toast.makeText(getActivity(), "Le fichier membres.txt n'existe pas", Toast.LENGTH_LONG).show();
-        }
-        catch (IOException e)
-        {
+        } catch (StreamCorruptedException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
             Toast.makeText(getActivity(), "Erreur d'entrée/sortie de fichier.", Toast.LENGTH_LONG).show();
-        }
-
-        catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 

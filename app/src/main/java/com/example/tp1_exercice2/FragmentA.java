@@ -132,8 +132,8 @@ public class FragmentA extends Fragment {
 
                 Membre troisMembre = new Membre("Saint-Pierre-Plamondon", "Louis-Paul", "Homme", "Politicien", "Jacques Demers a peut-être gagné la coupe Stanley, mais il ne savait pas lire. Ça ne l'a d'ailleurs pas empêché de devenir sénateur, et depuis, on attend plus ou moins patiemment l'annonce de sa mort.");
 
-                // Ajout des membres créés à la liste
-                listMembre.add(new Membre(formNom, formPrenom, formSexe, formFonction, formComment));
+                // Ajout des membres créés à la liste ????
+                //listMembre.add(new Membre(formNom, formPrenom, formSexe, formFonction, formComment));
 
                 listMembre.add(premierMembre);
                 listMembre.add(deuxMembre);

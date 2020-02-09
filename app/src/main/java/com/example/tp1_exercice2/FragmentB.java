@@ -23,9 +23,11 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -86,6 +88,7 @@ public class FragmentB extends Fragment {
             }
         });
 
+        // enregistrement dans le fichier .txt
         boutonEnregistrer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,17 +98,28 @@ public class FragmentB extends Fragment {
                 // création du fichier pour écriture
                 //ObjectOutputStream fichier = null;
 
+                String filename = "membres.txt";
+                ObjectOutput out = null;
+
                 try {
 
+                    out = new ObjectOutputStream(new FileOutputStream(new File(getActivity().getFilesDir(), "")+File.separator+filename));
+                    out.writeObject(listeMembre.get(1));
+                    out.close();
+
+
+/*
                     FileOutputStream fichierEcrit = view.getContext().openFileOutput("membres.txt", Context.MODE_PRIVATE);
                     ObjectOutputStream fichier = new ObjectOutputStream(fichierEcrit);
+*/
 /*
 
                     // test réussi d'un mot simple
                     Writer out = new OutputStreamWriter(fichierEcrit);
                     out.write("allo");
                     out.close();
-*/
+*//*
+
 
                     //fichier = new ObjectOutputStream(new FileOutputStream("membres.txt"));
 
@@ -117,6 +131,7 @@ public class FragmentB extends Fragment {
                     for (int i=0; i<listMembre.size(); i++) {
                         fichier.writeObject(listMembre.get(i));
                         fichier.writeChar(';');
+*/
 
 /*
 
@@ -135,21 +150,25 @@ public class FragmentB extends Fragment {
 
                         //fichier.flush();
                         //fichier.close(); */
-                    }
+                   // }
 
                     //Toast.makeText(getActivity(), getResources().getString(R.string.txt_enregistre), Toast.LENGTH_LONG).show();
+/*
                     fichier.flush();
                     fichier.close();
+*/
 
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
                 // liste vide plante????
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                intent.putParcelableArrayListExtra("cle_listMembres", (ArrayList<? extends Parcelable>) listeMembre);
+                //Intent intent = new Intent(getActivity(), MainActivity.class);
+                //intent.putParcelableArrayListExtra("cle_listMembres", (ArrayList<? extends Parcelable>) listeMembre);
                 vider();
-                startActivity(intent);
+                //startActivity(intent);
             }
 
             // pas oublier de mettre ici le vider????
