@@ -42,6 +42,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private ArrayList<Membre> listeMembres;
+    //????
+    private ArrayList<Membre> listMembres;
     private Intent intent;
 
     @Override
@@ -52,7 +54,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // on récupère le intent contenant l'ArrayList de membres du fragmentA (ajout membres)
         // pour le passer au fragmentB (enregistrer en .txt)
         intent = getIntent();
-        listeMembres = intent.getParcelableArrayListExtra("clé_listeMembres");
+        listeMembres = intent.getParcelableArrayListExtra("cle_listeMembres");
+
+        listMembres = new ArrayList<Membre>();
+        listMembres = intent.getParcelableArrayListExtra("cle_listMembres");
 
         // appel de la méthode pour mettre les choix dans le navdrawer
         setDrawerLayout();
@@ -87,9 +92,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // on crée un arraylist pour stocker les membres ajoutés au fragmentA
         // ainsi qu'un bundle pour le passer au fragmentB
-        ArrayList<Membre> listMembres; //= new ArrayList<Membre>() ????
-        listMembres = intent.getParcelableArrayListExtra("clé_listMembres");
+        /*ArrayList<Membre> listMembres = new ArrayList<Membre>();
+        listMembres = intent.getParcelableArrayListExtra("cle_listMembres");*/
         Bundle bundle = new Bundle();
+
+        if(listMembres == null){
+            Toast.makeText(this, "vide!", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, listMembres.get(2).getNom().toString(), Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, listMembres.get(0).getNom(), Toast.LENGTH_LONG).show();
+        }
 
         bundle.putParcelableArrayList("cle_listeMain", (ArrayList<? extends Parcelable>) listeMembres);
         bundle.putParcelableArrayList("cle_listMembres", (ArrayList<? extends Parcelable>) listMembres);

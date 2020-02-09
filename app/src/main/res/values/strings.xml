@@ -28,5 +28,10 @@
     <string name="entrez_nom_cherche">Entrez le nom et le prénom\n de la personne que vous recherchez</string>
     <string name="membre_inexistant">Membre inexistant</string>
     <string name="aucun_sexe">Aucun membre du sexe sélectionné</string>
+    <string name="liste_videe">Liste temporaire vidée</string>
+    <string name="titre_ajouter">Liste des membres à ajouter</string>
+    <string name="titre_rien_a_ajouter">Aucun membre à ajouter  pour le moment.</string>
+    <string name="membre_ajoute_temp">Membre ajouté à la liste temporaire</string>
+    <string name="txt_enregistre">Fichier .txt enregistré</string>
 
 </resources>

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
@@ -31,9 +32,11 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
+
+// classe appellée pour enregistrer en txt le tableau de membres ajoutés au fragmentA
 public class FragmentB extends Fragment {
 
-    private List<Membre> listMembre;
+    private ArrayList<Membre> listMembre;
 
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,15 +50,39 @@ public class FragmentB extends Fragment {
 
     }
 
+    private void setCardMembre(View view) {
+
+        // récupération d'une référence sur le recyclerview pour y afficher
+        // les infos des membres à ajouter au .txt
+        RecyclerView recMembres = view.findViewById(R.id.fragB_recycler);
+        LinearLayoutManager llm = new LinearLayoutManager(view.getContext());
+
+        listMembre = this.getArguments().getParcelableArrayList("cle_listeMain");
+
+        // vérification que la liste est vide. Si oui, initialisation et affichage du message correspondant
+        if(listMembre == null) {
+            listMembre = new ArrayList<Membre>();
+            setMessage(view, true);
+        } else {
+            setMessage(view, false);
+        }
+
+        MembresAdapter mAdapter = new MembresAdapter(listMembre);
+
+        recMembres.setAdapter(mAdapter);
+        recMembres.setLayoutManager(llm);
+    }
+
     private void setBouton(final View view) {
 
         MaterialButton boutonVider = view.findViewById(R.id.fragB_bouton_vider);
         MaterialButton boutonEnregistrer = view.findViewById(R.id.fragB_bouton_enregistrer);
+        final ArrayList<Membre> listeMembre = this.getArguments().getParcelableArrayList("cle_listeMain");
 
         boutonVider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vider(listMembre);
+                vider();
             }
         });
 
@@ -69,7 +96,6 @@ public class FragmentB extends Fragment {
                 //ObjectOutputStream fichier = null;
 
                 try {
-
 
                     FileOutputStream fichierEcrit = view.getContext().openFileOutput("membres.txt", Context.MODE_PRIVATE);
                     ObjectOutputStream fichier = new ObjectOutputStream(fichierEcrit);
@@ -111,58 +137,35 @@ public class FragmentB extends Fragment {
                         //fichier.close(); */
                     }
 
-
+                    //Toast.makeText(getActivity(), getResources().getString(R.string.txt_enregistre), Toast.LENGTH_LONG).show();
                     fichier.flush();
                     fichier.close();
 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
+                // liste vide plante????
                 Intent intent = new Intent(getActivity(), MainActivity.class);
-                intent.putParcelableArrayListExtra("clé_listMembres", (ArrayList<? extends Parcelable>) listMembre);
+                intent.putParcelableArrayListExtra("cle_listMembres", (ArrayList<? extends Parcelable>) listeMembre);
+                vider();
                 startActivity(intent);
-                vider(listMembre);
             }
 
             // pas oublier de mettre ici le vider????
         });
     }
 
-    private void vider(List<Membre> listMembre) {
+    private void vider() {
 
-        listMembre = null;
+        listMembre.clear();
         Intent intent = new Intent(getActivity(), MainActivity.class);
 
         // j'ai fait un cast sur listMembre, car la classe Membre implements Parcelable (comme dans les notes de cours)
         // et la méthode putParcelableArrayListExtra requiert un ArrayList qui extends Parcelable comme argument
-        intent.putParcelableArrayListExtra("clé_listeMembres", (ArrayList<? extends Parcelable>) listMembre);
+        intent.putParcelableArrayListExtra("cle_listeMembres", (ArrayList<? extends Parcelable>) listMembre);
+        Toast.makeText(getActivity(), getResources().getString(R.string.liste_videe), Toast.LENGTH_LONG).show();
         startActivity(intent);
-    }
-
-    private void setCardMembre(View view) {
-
-        // on récupère une référence sur le recycler view pour y afficher
-        // les infos des membres à ajouter au .txt
-        RecyclerView recMembres = view.findViewById(R.id.fragB_recycler);
-        //recMembres.setHasFixedSize(true);                           // essayer d'enlever ça???
-        LinearLayoutManager llm = new LinearLayoutManager(view.getContext());
-        //llm.setOrientation(LinearLayoutManager.VERTICAL);
-
-        listMembre = this.getArguments().getParcelableArrayList("cle_listeMain");
-
-        // on vérifie si la liste est vide, si oui, on l'initialise
-        if(listMembre == null) {
-            listMembre = new ArrayList<Membre>();
-            setMessage(view, true);
-        } else {
-            setMessage(view, false);
-        }
-
-        MembresAdapter mAdapter = new MembresAdapter(listMembre);
-
-        recMembres.setAdapter(mAdapter);
-        recMembres.setLayoutManager(llm);
-
     }
 
     private void setMessage(View v, Boolean listeNulle) {
@@ -170,12 +173,9 @@ public class FragmentB extends Fragment {
         TextView textView = v.findViewById(R.id.fragB_message);
 
         if(!listeNulle) {
-            textView.setText("Liste des membres à ajouter");
+            textView.setText(R.string.titre_ajouter);
         } else {
-            textView.setText("Aucun membre à ajouter\n pour le moment.");
+            textView.setText(R.string.titre_rien_a_ajouter);
         }
-
-        // ??? à ajouter à String.xml
-
     }
 }

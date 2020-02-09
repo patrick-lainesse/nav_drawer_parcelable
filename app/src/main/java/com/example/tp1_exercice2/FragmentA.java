@@ -28,11 +28,6 @@ import java.util.List;
 
 public class FragmentA extends Fragment {
 
-/*    private String formNom = null;
-    private String formPrenom = null;
-    private String formSexe = null;
-    private String formFonction = null;
-    private String formComment = null;*/
     private ArrayList<Membre> listMembre;
 
     // on récupère les références sur les différents champs du formulaire
@@ -47,7 +42,7 @@ public class FragmentA extends Fragment {
 
         // on récupère le ArrayList de l'activité principale
         Intent intent = getActivity().getIntent();
-        listMembre = intent.getParcelableArrayListExtra("clé_listeMembres");
+        listMembre = intent.getParcelableArrayListExtra("cle_listeMembres");
 
         // on vérifie si la liste est vide ou si elle contient déjà quelques membres
         // si vide, on l'initialise
@@ -73,7 +68,6 @@ public class FragmentA extends Fragment {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.item_menu_fonction, postes);
 
-        //AutoCompleteTextView menuFonctions = v.findViewById(R.id.fragA_menuFonction);  ???? problème ici quand saisit texte dans la boîte
         AutoCompleteTextView menuFonctions = v.findViewById(R.id.fragA_menuFonction);
         menuFonctions.setAdapter(adapter);
     }
@@ -150,9 +144,9 @@ public class FragmentA extends Fragment {
                 Intent intent = new Intent(getActivity(), MainActivity.class);
 
                 // on passe la liste à l'activité principale et on la démarre
-                intent.putParcelableArrayListExtra("clé_listeMembres", listMembre);
+                intent.putParcelableArrayListExtra("cle_listeMembres", listMembre);
                 startActivity(intent);
-                Toast.makeText(getActivity(), "Membre ajouté", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.membre_ajoute_temp), Toast.LENGTH_LONG).show();
             }
         });
 
