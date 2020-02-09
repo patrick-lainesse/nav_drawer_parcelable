@@ -33,7 +33,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-// plante lorsque vide avec l'option Lister????
 // la même classe est utilisée pour toutes les fonctions qui nécessitent de lister, car seule une petite
 // partie du code change selon le choix effectué sur le navigation drawer
 public class FragmentC extends Fragment {
@@ -48,14 +47,13 @@ public class FragmentC extends Fragment {
         lireFichier(view);
 
         return view;
+
+        // plante lorsque vide avec l'option Lister????
     }
 
     private void lireFichier(View view) {
 
         MaterialTextView titreMTV = view.findViewById(R.id.fragC_titre);
-
-        // va falloir remplacer ça par la lecture du txt ??????
-        //listMembre = this.getArguments().getParcelableArrayList("cle_listeMain");
 
         // on récupère l'option qui a été sélectionnée sur le navigation drawer
         char choixDrawer = this.getArguments().getChar("char_choix");
@@ -63,38 +61,20 @@ public class FragmentC extends Fragment {
         listMembre = new ArrayList<Membre>();
 
         ObjectInputStream input;
-        String filename = "membres.txt";
+        String nomFichier = "membres.txt";
 
         try {
 
-            input = new ObjectInputStream(new FileInputStream(new File(new File(getActivity().getFilesDir(), "")+File.separator+filename)));
-            Membre membreLu = (Membre) input.readObject();
-            listMembre.add(membreLu);
-            input.close();
+            input = new ObjectInputStream(new FileInputStream(new File(new File(getActivity().getFilesDir(), "")+File.separator+nomFichier)));
 
-            //ObjectInputStream fichierIn = new ObjectInputStream(new FileInputStream(new File("membres.txt")));
+            int nbMembres = input.readInt();
 
-            /*
-            // test mot simple réussi
-            FileInputStream fis = view.getContext().openFileInput("membres.txt");
-            BufferedReader r = new BufferedReader(new InputStreamReader(fis));
-            String line = r.readLine();
-            r.close();
-            Toast.makeText(getActivity(), line, Toast.LENGTH_LONG).show();
-*/
-/*
-            // on récupère le nombre de membres dans le fichier
-            int nbMembres = fichierIn.readInt();
-            char separateur = fichierIn.readChar();
-
-            for (int i=0; i<nbMembres; i++)
-            {
-                listMembre.add((Membre) fichierIn.readObject());
-                separateur = fichierIn.readChar();
+            for (int i=0; i<nbMembres; i++) {
+                Membre membreLu = (Membre) input.readObject();
+                listMembre.add(membreLu);
             }
 
-
-            fichierIn.close();*/
+            input.close();
 
         } catch (FileNotFoundException e)
         {
@@ -139,7 +119,7 @@ public class FragmentC extends Fragment {
                     listChoix.add(listMembre.get(i));
                 }
             }
-            //setTable(view, listChoix);
+            setProfessionnelle(view, listChoix);
         }
 
 
@@ -266,11 +246,33 @@ public class FragmentC extends Fragment {
 
         MembresAdapterTable mAdapter =  new MembresAdapterTable(listEnTete);
         recMembres.setAdapter(mAdapter);
-        //recMembres.setLayoutManager(llm);
 
-
-        //MembresAdapterTable mAdapter = new MembresAdapterTable(listMembre);
         mAdapter = new MembresAdapterTable(liste);
+
+        recMembres.setAdapter(mAdapter);
+        recMembres.setLayoutManager(llm);
+    }
+
+    // méthode pour n'afficher que les noms des femmes et leur fonction
+    private void setProfessionnelle(View view, ArrayList<Membre> liste) {
+
+        view.findViewById(R.id.fragF_sexe_cache).setVisibility(View.INVISIBLE);
+        view.findViewById(R.id.fragF_commentaires_cache).setVisibility(View.INVISIBLE);
+
+        // on récupère une référence sur le recycler view pour y afficher les infos des membres à ajouter au .txt
+        RecyclerView recMembres = view.findViewById(R.id.fragC_recycler);
+        LinearLayoutManager llm = new LinearLayoutManager(view.getContext());
+
+        // on crée un en-tête
+        Membre membreEnTete = new Membre("Nom", "Prenom", "Sexe", "Fonction", "Commentaires");
+        List<Membre> listEnTete = new ArrayList<>();
+
+        listEnTete.add(membreEnTete);
+
+        MembresAdapterProfessionnelle mAdapter =  new MembresAdapterProfessionnelle(listEnTete);
+        recMembres.setAdapter(mAdapter);
+
+        mAdapter = new MembresAdapterProfessionnelle(liste);
 
         recMembres.setAdapter(mAdapter);
         recMembres.setLayoutManager(llm);

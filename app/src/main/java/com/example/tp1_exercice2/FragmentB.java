@@ -93,18 +93,19 @@ public class FragmentB extends Fragment {
             @Override
             public void onClick(View v) {
 
-                // vérifier si le fichier existe déjà????
-
-                // création du fichier pour écriture
-                //ObjectOutputStream fichier = null;
-
-                String filename = "membres.txt";
+                String nomFichier = "membres.txt";
                 ObjectOutput out = null;
 
                 try {
 
-                    out = new ObjectOutputStream(new FileOutputStream(new File(getActivity().getFilesDir(), "")+File.separator+filename));
-                    out.writeObject(listeMembre.get(1));
+                    out = new ObjectOutputStream(new FileOutputStream(new File(getActivity().getFilesDir(), "")+File.separator+nomFichier));
+
+                    out.writeInt(listeMembre.size());
+
+                    for(int i=0; i<listeMembre.size(); i++) {
+                        out.writeObject(listeMembre.get(i));
+                    }
+
                     out.close();
 
 
